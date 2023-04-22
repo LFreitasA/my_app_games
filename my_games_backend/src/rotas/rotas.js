@@ -9,10 +9,10 @@ rotas.get('/', (req, res) => {
 
 rotas.get('/usuarios', usuarios.listarUsuario);
 
-rotas.get('/usuarios/:id', usuarios.obterUsuario);
+rotas.post('/usuarios_login', usuarios.usuarios_login);
 
-rotas.post('/usuarios/', usuarios.cadastrarUsuario);
+rotas.post('/usuarios', usuarios.cadastrarUsuario);
 
-rotas.put('/usuarios/:id', usuarios.editarUsuario);
+rotas.post('/usuarios/:id', usuarios.editarUsuario);
 
 module.exports = rotas;

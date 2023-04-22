@@ -1,23 +1,39 @@
 import 'package:flutter/material.dart';
+import 'package:my_games/app/data/login/login_logica.dart';
+import 'package:my_games/app/data/model/logar_usuario_model.dart';
 import 'package:my_games/app/ui/pages/components/campo_de_texto.dart';
+import 'package:my_games/app/ui/pages/components/mostrar_dialog.dart';
+import 'package:provider/provider.dart';
 
-class Login extends StatelessWidget {
+import '../../../data/autenticacao_services.dart';
+
+class Login extends StatefulWidget {
   Login({super.key});
-  final TextEditingController email = TextEditingController();
-  final TextEditingController senha = TextEditingController();
+
+  @override
+  State<Login> createState() => _LoginState();
+}
+
+class _LoginState extends State<Login> {
+  final TextEditingController emailController = TextEditingController();
+
+  final TextEditingController senhaController = TextEditingController();
+
+  late final AutenticacaoServices _autenticacaoServices = context.read();
+
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         const Text("Informe os dados para realizar o login"),
         CampoDeTexto(
-            controller: email,
+            controller: emailController,
             hintText: "Informe seu e-mail",
             labelText: "E-mail",
             obscureText: false,
             icone: null),
         CampoDeTexto(
-            controller: senha,
+            controller: senhaController,
             hintText: "Informe sua senha",
             labelText: "Senha",
             obscureText: true,
@@ -28,43 +44,11 @@ class Login extends StatelessWidget {
         Row(
           children: [
             ElevatedButton(
-                onPressed: () {
-                  if (email.text == "a" && senha.text == "a") {
-                    showDialog(
-                      context: context,
-                      builder: (context) {
-                        return AlertDialog(
-                          title: const Text("Sucesso"),
-                          content: const Text(
-                              "Login realizado com sucesso --aguardando o restante da implementação"),
-                          actions: [
-                            TextButton(
-                                onPressed: () {
-                                  Navigator.of(context).pop();
-                                },
-                                child: const Text("OK"))
-                          ],
-                        );
-                      },
-                    );
-                  } else {
-                    showDialog(
-                      context: context,
-                      builder: (context) {
-                        return AlertDialog(
-                          title: const Text("Erro"),
-                          content: const Text("E-mail e/ou Senha incorrectos"),
-                          actions: [
-                            TextButton(
-                                onPressed: () {
-                                  Navigator.of(context).pop();
-                                },
-                                child: const Text("OK"))
-                          ],
-                        );
-                      },
-                    );
-                  }
+                onPressed: () async {
+                  realizarLogin(context,
+                      emailController: emailController,
+                      senhaController: senhaController,
+                      autenticacaoServices: _autenticacaoServices);
                 },
                 child: const Text("Login"))
           ],

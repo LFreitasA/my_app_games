@@ -5,14 +5,14 @@ import '../components/campo_de_texto.dart';
 
 class EsqueciMinhaSenha extends StatelessWidget {
   EsqueciMinhaSenha({super.key});
-  TextEditingController emailRecovery = TextEditingController();
-  TextEditingController dataNascimentoRecovery = TextEditingController();
+  final TextEditingController emailRecovery = TextEditingController();
+  final TextEditingController dataNascimentoRecovery = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return ListView(
       children: [
-        Text("Recuperar sua senha"),
+        const Text("Recuperar sua senha"),
         CampoDeTexto(
             controller: emailRecovery,
             hintText: "E-mail",

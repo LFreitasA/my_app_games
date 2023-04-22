@@ -27,7 +27,7 @@ void cadastroRealizado(context,
       dataNascimentoController: dataNascimentoController,
       senhaController: senhaController,
       confirmacaoSenhaController: confirmacaoSenhaController);
-  Navigator.of(context).pushReplacementNamed('/homeLogada');
+  Navigator.of(context).pushReplacementNamed('/home_logada');
 }
 
 void senhasDiferentes(

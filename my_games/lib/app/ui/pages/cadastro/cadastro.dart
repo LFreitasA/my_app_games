@@ -62,11 +62,13 @@ class _CadastrarState extends State<Cadastrar> {
           obscureText: true,
           icone: null,
         ),
+        const SizedBox(
+          height: 32,
+        ),
         Row(
           children: [
             ElevatedButton(
               onPressed: () async {
-                bool chamadaApiConcluida = false;
                 if (senhaController.text.isEmpty ||
                     confirmacaoSenhaController.text.isEmpty) {
                   mostrarDialog(context,
@@ -82,7 +84,6 @@ class _CadastrarState extends State<Cadastrar> {
                       dataNascimentoController: dataNascimentoController,
                       senhaController: senhaController,
                       confirmacaoSenhaController: confirmacaoSenhaController);
-                  chamadaApiConcluida = true;
                   if (sucesso == 200) {
                     mostrarDialog(context,
                         funcao: () => cadastroRealizado(context,

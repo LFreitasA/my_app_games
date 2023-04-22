@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:my_games/app/data/enum/autenticacao_status_enum.dart';
 import 'package:my_games/app/data/http_client/services_http_client.dart';
+import 'package:my_games/app/data/model/logar_usuario_model.dart';
 import 'package:my_games/app/data/model/registrar_usuario_model.dart';
 
 class AutenticacaoServices {
@@ -22,11 +23,21 @@ class AutenticacaoServices {
         'dataNascimento': model.dataNascimento,
         'email': model.email
       });
-      print("data");
-      print(data);
       if (data == 200) {
         return data;
       }
+    } catch (error) {
+      rethrow;
+    }
+  }
+
+  Future logarUsuario(LogarUsuarioModel model) async {
+    try {
+      final data = await _httpClient.post('/usuarios_login', body: {
+        'email': model.email,
+        'senha': model.senha,
+      });
+      return data;
     } catch (error) {
       rethrow;
     }

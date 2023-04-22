@@ -4,12 +4,19 @@ import 'package:my_games/app/data/http_client/services_http_client.dart';
 import 'package:my_games/app/ui/pages/components/build_app.dart';
 import 'package:my_games/app/ui/pages/home/home_page.dart';
 import 'package:my_games/app/ui/pages/cadastro/cadastro.dart';
+import 'package:my_games/app/ui/pages/home_logada/home_logada.dart';
 import 'package:my_games/app/ui/pages/login/login.dart';
 import 'package:provider/provider.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
 import 'app/ui/pages/esqueci_minha_senha/esqueci_minha_senha.dart';
 
-void main() {
+void main() async {
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
   runApp(
     MultiProvider(
       providers: [
@@ -30,7 +37,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
         theme: ThemeData(
-            dialogTheme: DialogTheme(
+            dialogTheme: const DialogTheme(
                 backgroundColor: Colors.red, shadowColor: Colors.blue),
             secondaryHeaderColor: Colors.pink,
             focusColor: Colors.red,
@@ -40,20 +47,20 @@ class MyApp extends StatelessWidget {
             indicatorColor: Colors.yellow,
             //brightness: Brightness.dark,
             canvasColor: Colors.amber,
-            inputDecorationTheme: InputDecorationTheme(
+            inputDecorationTheme: const InputDecorationTheme(
                 labelStyle: TextStyle(color: Colors.white),
                 fillColor: Colors.red),
-            scaffoldBackgroundColor: Colors.purple),
+            scaffoldBackgroundColor: Colors.white),
         debugShowCheckedModeBanner: false,
-        initialRoute: '/initial',
+        initialRoute: '/home',
         routes: {
-          '/initial': (context) => const BuildApp(myFunctionality: HomePage()),
+          '/home': (context) => const BuildApp(myFunctionality: HomePage()),
           '/esqueciMinhaSenha': (context) =>
               BuildApp(myFunctionality: EsqueciMinhaSenha()),
           '/cadastrar': (context) =>
               const BuildApp(myFunctionality: Cadastrar()),
           '/login': (context) => BuildApp(myFunctionality: Login()),
-          '/homeLogada': (context) => BuildApp(myFunctionality: Container()),
+          '/home_logada': (context) => BuildApp(myFunctionality: Home_Logada()),
         },
         home: const BuildApp(myFunctionality: HomePage()));
   }
